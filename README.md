@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Brainbox Syndicate Website
 
-## Getting Started
+### Tech Stack
+- Next.js 14 (App Router, Static Export)
+- Tailwind CSS
+- Fonts: Fraunces, DM Sans, DM Mono (Google Fonts via next/font)
 
-First, run the development server:
-
+### Setup
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Image Assets Needed
+- /public/images/logo.png — Company logo (SVG preferred)
+- /public/images/hero/ — 5 hero slideshow images (1920x1080)
+- /public/images/about-hero.jpg — About page hero (1920x700)
+- /public/images/services-hero.jpg — Services page hero
+- /public/images/impact-hero.jpg — Impact page hero
+- /public/images/clients-hero.jpg — Clients page hero
+- /public/images/team/ — Individual photos (400x500 recommended)
+- /public/images/awards/ — Appreciation certificate images
+- /public/og-image.jpg — Open Graph image (1200x630)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Deployment
+Static output is generated in /out and can be deployed to Vercel, Netlify, or any static host.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Form Setup
+The contact form in app/contact/page.tsx is UI-only for now. Connect it to a backend service such as Formspree, Resend, or Nodemailer.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Adding New Portfolio Projects
+All projects live in one file: /lib/portfolio-data.ts
+1. Open the file
+2. Find the array for your project type: currentProjects / baselineAssessments / trainingCapacity / evaluationResearch
+3. Copy the last entry in that array
+4. Increment the id (e.g. "bl-24" → "bl-25")
+5. Fill in your new project's details
+6. Save the file — it will appear on the website automatically
+No code changes required anywhere else.
