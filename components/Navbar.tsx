@@ -45,25 +45,14 @@ export default function Navbar() {
               href="/" 
               className="flex items-center transition-all duration-300 hover:opacity-80"
             >
-              {scrolled ? (
-                <Image
-                  src="/images/brainbox_logo.png"
-                  alt="Brainbox Syndicate"
-                  width={170}
-                  height={52}
-                  className="h-10 w-auto object-contain"
-                  priority
-                />
-              ) : (
-                <Image
-                  src="/images/Brainbox_logo.png"
-                  alt="Brainbox Syndicate"
-                  width={170}
-                  height={52}
-                  className="h-10 w-auto object-contain"
-                  priority
-                />
-              )}
+              <Image
+                src="/images/brainbox_Logo.png"
+                alt="Brainbox Syndicate"
+                width={170}
+                height={52}
+                className="h-10 w-auto object-contain"
+                priority
+              />
             </Link>
           </div>
 

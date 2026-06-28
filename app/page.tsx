@@ -674,9 +674,7 @@ export default function Home() {
             <div className="relative rotate-1 overflow-hidden rounded-2xl bg-gradient-to-br from-forest to-forest/80 shadow-2xl aspect-[4/5]">
               <div className="flex h-full items-center justify-center">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="./images/awards/green_award.jpg" alt="Green Innovation Award" className="h-full w-full object-cover" />
-              </div>
-
+              <img src="/images/awards/green_award.jpg" alt="Green Innovation Award" className="h-full w-full object-cover" />
               <motion.div 
                 className="absolute bottom-6 left-6 -rotate-1 rounded-xl border border-white/10 bg-white/95 p-4 shadow-2xl backdrop-blur-sm"
                 whileHover={{ scale: 1.05, rotate: 0 }}
@@ -695,6 +693,7 @@ export default function Home() {
                   ))}
                 </div>
               </motion.div>
+            </div>
             </div>
           </motion.div>
         </div>

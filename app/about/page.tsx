@@ -92,6 +92,8 @@ interface Award {
   label: string;
   aspect: string;
   icon: LucideIcon;
+  image: string; // Added image path
+  description?: string; // Optional description
 }
 
 interface PakistanMapProps {
@@ -243,13 +245,56 @@ const offices: Office[] = [
   },
 ];
 
+// Updated awards with image paths
 const awards: Award[] = [
-  { id: 1, label: "Appreciation Certificate", aspect: "aspect-[4/5]", icon: Trophy },
-  { id: 2, label: "Green Innovation Award", aspect: "aspect-[3/4]", icon: Leaf },
-  { id: 3, label: "Excellence in MEL", aspect: "aspect-square", icon: BarChart },
-  { id: 4, label: "Partner Recognition", aspect: "aspect-[4/3]", icon: Handshake },
-  { id: 5, label: "USAID Appreciation", aspect: "aspect-[3/5]", icon: Star },
-  { id: 6, label: "Climate Action Certificate", aspect: "aspect-[4/5]", icon: Globe },
+  { 
+    id: 1, 
+    label: "Appreciation Certificate", 
+    aspect: "aspect-[4/5]", 
+    icon: Trophy, 
+    image: "/images/certificates/4.png",
+    description: "For outstanding contributions to development sector"
+  },
+  { 
+    id: 2, 
+    label: "Green Innovation Award", 
+    aspect: "aspect-[3/4]", 
+    icon: Leaf, 
+    image: "/images/awards/green_award.jpg",
+    description: "International recognition for sustainable development"
+  },
+  { 
+    id: 3, 
+    label: "Excellence in MEL", 
+    aspect: "aspect-square", 
+    icon: BarChart, 
+    image: "/images/certificates/6.png",
+    description: "Monitoring, Evaluation & Learning excellence"
+  },
+  { 
+    id: 4, 
+    label: "Partner Recognition", 
+    aspect: "aspect-[4/3]", 
+    icon: Handshake, 
+    image: "/images/certificates/1.png",
+    description: "Recognized by key development partners"
+  },
+  { 
+    id: 5, 
+    label: "USAID Appreciation", 
+    aspect: "aspect-[3/5]", 
+    icon: Star, 
+    image: "/images/certificates/2.png",
+    description: "USAID Certificate of Appreciation"
+  },
+  { 
+    id: 6, 
+    label: "", 
+    aspect: "aspect-[4/5]", 
+    icon: Globe, 
+    image: "/images/certificates/3.png",
+    description: "Climate Action & Sustainability recognition"
+  },
 ];
 
 function LeafPattern() {
@@ -796,7 +841,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* SECTION 7 — AWARDS & RECOGNITION */}
+      {/* SECTION 7 — AWARDS & RECOGNITION with Images */}
       <section ref={awardsRef} className="bg-gradient-to-b from-cream to-white px-6 py-20 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <motion.div
@@ -811,16 +856,22 @@ export default function AboutPage() {
             >
               Recognition & <span className="text-red">Certificates</span>
             </motion.h2>
+            <motion.p
+              variants={fadeInUp}
+              className="mt-3 font-sans text-[15px] text-muted"
+            >
+              Click on any certificate to view it in full detail
+            </motion.p>
           </motion.div>
 
           <motion.div
-            className="mt-12 columns-1 gap-4 sm:columns-2 lg:columns-3"
+            className="mt-12 columns-1 gap-6 sm:columns-2 lg:columns-3"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
-            {awards.map((award, idx) => {
+            {awards.map((award) => {
               const Icon = award.icon;
               return (
                 <motion.button
@@ -828,27 +879,47 @@ export default function AboutPage() {
                   variants={fadeInUp}
                   type="button"
                   onClick={() => setLightboxAward(award)}
-                  className={`group relative mb-4 block w-full overflow-hidden rounded-xl ${award.aspect} break-inside-avoid`}
+                  className={`group relative mb-6 block w-full overflow-hidden rounded-xl ${award.aspect} break-inside-avoid shadow-lg hover:shadow-2xl transition-shadow duration-300`}
                   whileHover={{ scale: 1.03 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="flex h-full min-h-[200px] items-center justify-center bg-gradient-to-br from-charcoal/5 to-charcoal/10 transition-transform duration-500 group-hover:scale-105">
-                    <div className="text-center">
-                      <Icon className="h-12 w-12 mx-auto mb-2 text-charcoal/40 group-hover:text-red/50 transition-colors duration-300" />
-                      <span className="font-serif text-sm italic text-muted">
+                  <div className="relative h-full min-h-[220px] w-full bg-gradient-to-br from-charcoal/5 to-charcoal/10">
+                    {/* Certificate Image */}
+                    <Image
+                      src={award.image}
+                      alt={award.label}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                    
+                    {/* Overlay gradient for better text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    
+                    {/* Default state - icon and label shown when image is loading or as fallback */}
+                    {/* <div clas sName="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-charcoal/5 to-charcoal/10 group-hover:opacity-0 transition-opacity duration-300"> */}
+                      {/* <Icon className="h-12 w-12 mb-3 text-charcoal/40 group-hover:text-red/30 transition-colors duration-300" /> */}
+                      {/* <span className="font-serif text-sm italic text-muted text-center px-4">
                         {award.label}
                       </span>
-                    </div>
+                    </div> */}
+
+                    {/* Hover overlay with action prompt */}
+                    <motion.div
+                      className="absolute inset-0 flex flex-col items-center justify-center bg-charcoal/75 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                      initial={false}
+                    >
+                      <AwardIcon className="h-10 w-10 text-gold mb-3" />
+                      <span className="font-mono text-sm font-bold uppercase tracking-widest text-gold">
+                        View Certificate
+                      </span>
+                      {award.description && (
+                        <span className="mt-2 font-sans text-xs text-white/70 text-center px-4">
+                          {award.description}
+                        </span>
+                      )}
+                    </motion.div>
                   </div>
-                  <motion.div
-                    className="absolute inset-0 flex flex-col items-center justify-center bg-charcoal/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                    initial={false}
-                  >
-                    <AwardIcon className="h-8 w-8 text-gold mb-2" />
-                    <span className="font-mono text-xs font-bold uppercase tracking-widest text-gold">
-                      View Certificate
-                    </span>
-                  </motion.div>
                 </motion.button>
               );
             })}
@@ -856,14 +927,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Lightbox modal */}
+      {/* Lightbox modal with certificate image */}
       <AnimatePresence>
         {lightboxAward && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-charcoal/90 p-6 backdrop-blur-sm"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-charcoal/95 p-4 backdrop-blur-md"
             onClick={() => setLightboxAward(null)}
             role="dialog"
             aria-modal="true"
@@ -872,42 +943,49 @@ export default function AboutPage() {
             <motion.button
               type="button"
               onClick={() => setLightboxAward(null)}
-              className="absolute right-6 top-6 text-white/70 transition-colors hover:text-white"
+              className="absolute right-6 top-6 text-white/70 transition-colors hover:text-white z-10"
               aria-label="Close lightbox"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
               <X className="h-8 w-8" />
             </motion.button>
+            
             <motion.div
               initial={{ scale: 0.8, opacity: 0, y: 50 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.8, opacity: 0, y: 50 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative max-h-[85vh] max-w-2xl overflow-hidden rounded-2xl bg-white p-12 shadow-2xl"
+              className="relative max-h-[90vh] max-w-4xl w-full overflow-hidden rounded-2xl bg-white shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex flex-col items-center justify-center">
-                <motion.div
-                  initial={{ rotate: -10, scale: 0.8 }}
-                  animate={{ rotate: 0, scale: 1 }}
-                  transition={{ delay: 0.2, type: "spring" }}
-                >
-                  {(() => {
-                    const Icon = lightboxAward.icon;
-                    return <Icon className="h-24 w-24 text-gold mb-6" />;
-                  })()}
-                </motion.div>
-                <h3 className="font-serif text-2xl font-bold text-charcoal text-center">
-                  {lightboxAward.label}
-                </h3>
-                <p className="mt-4 font-sans text-sm text-muted text-center">
-                  Certificate image placeholder — add files to{' '}
-                  <code className="font-mono text-xs bg-charcoal/5 px-2 py-1 rounded">
-                    /public/images/awards/
-                  </code>
-                </p>
-                <div className="mt-6 h-px w-12 bg-gradient-to-r from-red to-gold" />
+              <div className="relative aspect-[3/4] md:aspect-[4/3] w-full">
+                <Image
+                  src={lightboxAward.image}
+                  alt={lightboxAward.label}
+                  fill
+                  className="object-contain p-4"
+                  sizes="(max-width: 768px) 100vw, 80vw"
+                  priority
+                />
+              </div>
+              
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 pt-12">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="font-serif text-xl font-bold text-white">
+                      {lightboxAward.label}
+                    </h3>
+                    {lightboxAward.description && (
+                      <p className="mt-1 font-sans text-sm text-white/80">
+                        {lightboxAward.description}
+                      </p>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <AwardIcon className="h-6 w-6 text-gold" />
+                  </div>
+                </div>
               </div>
             </motion.div>
           </motion.div>
