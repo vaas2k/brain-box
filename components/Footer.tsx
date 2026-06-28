@@ -20,7 +20,7 @@ export default function Footer() {
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
           <div className="flex flex-col space-y-6 lg:col-span-5">
             <Link href="/" className="inline-flex w-fit items-center rounded-none bg-cream/95 p-3.5 shadow-sm transition hover:bg-cream">
-              <Image src="/images/Brainbox_Logo.png" alt="Brainbox Syndicate" width={150} height={46} className="h-9 w-auto object-contain" />
+              <Image src="/images/brainbox_Logo.png" alt="Brainbox Syndicate" width={150} height={46} className="h-9 w-auto object-contain" />
             </Link>
             <p className="max-w-sm font-sans text-sm leading-relaxed text-cream/70">
               Advancing resilient institutions, inclusive growth, and measurable impact since 2008.

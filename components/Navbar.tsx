@@ -47,7 +47,7 @@ export default function Navbar() {
             >
               {scrolled ? (
                 <Image
-                  src="/images/Brainbox_logo.png"
+                  src="/images/brainbox_logo.png"
                   alt="Brainbox Syndicate"
                   width={170}
                   height={52}
