@@ -72,6 +72,8 @@ interface Project {
   title: string;
   meta: string;
   description: string;
+  period?: string;
+  location?: string;
 }
 
 interface Tab {
@@ -110,7 +112,7 @@ const statItems: StatItem[] = [
     icon: Users,
   },
   {
-    value: '150+',
+    value: '300+',
     label: 'CSOs and grassroots orgs empowered',
     span: 'md:col-span-1',
     accent: 'left-0',
@@ -132,32 +134,55 @@ const statItems: StatItem[] = [
   },
 ];
 
+// UPDATED CURRENT PROJECTS from the image
 const tabs: Tab[] = [
   {
     id: 'current',
-    label: 'Current Projects 2024–25',
+    label: 'Current Projects 2026',
     color: 'red',
     icon: Clock,
     projects: [
       {
+        title: 'Consultancy for Development of a Gender-Responsive Leadership-Focused CBDRM/CERT Curriculum and ToT for AKHP Project Staff',
+        meta: 'AKHP · GB & Sindh · April – July 2026',
+        description: 'Development of a gender-responsive leadership-focused CBDRM/CERT curriculum and Training of Trainers (ToT) for AKHP project staff to enhance community-based disaster risk management capabilities.',
+        period: 'April – July 2026',
+        location: 'GB & Sindh'
+      },
+      {
+        title: 'Development of Training Content and Delivery of Training of Trainers (ToT) on Green Skills and Climate-Smart Technologies of Project Staff',
+        meta: 'Care International Pakistan · KP, Balochistan, Islamabad and GB · April – August 2026',
+        description: 'Development of comprehensive training content and delivery of Training of Trainers (ToT) on green skills and climate-smart technologies for project staff across multiple regions.',
+        period: 'April – August 2026',
+        location: 'KP, Balochistan, Islamabad and GB'
+      },
+      {
+        title: 'Update of the State of the Environment (SoE) 2018: Agriculture, Livestock, and Food Security',
+        meta: 'Azad Jammu & Kashmir (AJ&K) · All Districts of AJK · May – December 2026',
+        description: 'Update of the State of the Environment (SoE) 2018 report focusing on Agriculture, Livestock, and Food Security sectors across all districts of Azad Jammu & Kashmir.',
+        period: 'May – December 2026',
+        location: 'All Districts of AJK'
+      },
+      {
         title: 'Women-led Climate Enterprise Baseline',
         meta: 'IRC · Khyber Pakhtunkhwa · 2025',
         description: 'A mixed-method assessment shaping women-led resilient livelihood pathways in climate-vulnerable districts.',
+        period: '2025',
+        location: 'Khyber Pakhtunkhwa'
       },
       {
         title: 'Gender and Social Inclusion Review',
         meta: 'UN Women · Punjab · 2024',
         description: 'Rapid review supporting inclusive programming design for women and youth-led initiatives.',
+        period: '2024',
+        location: 'Punjab'
       },
       {
         title: 'MEL System Strengthening for Local Partners',
         meta: 'Oxfam · Sindh · 2025',
         description: 'A practical systems upgrade for evidence-based learning and accountability in partner organizations.',
-      },
-      {
-        title: 'Climate Adaptation and Livelihoods Mapping',
-        meta: 'UNFAO · Balochistan · 2024',
-        description: 'Integrated mapping of climate exposure and livelihood vulnerability for targeted adaptation planning.',
+        period: '2025',
+        location: 'Sindh'
       },
     ],
   },
@@ -171,21 +196,29 @@ const tabs: Tab[] = [
         title: 'Institutional Capacity Review',
         meta: 'PPAF · Islamabad · 2024',
         description: 'Strategic review of governance, systems, and delivery capacity for a national NGO network.',
+        period: '2024',
+        location: 'Islamabad'
       },
       {
         title: 'Organizational Development Strategy',
         meta: 'RSPN · Gilgit · 2025',
         description: 'A forward-looking development plan focused on program quality, partnerships, and growth.',
+        period: '2025',
+        location: 'Gilgit'
       },
       {
         title: 'Program Quality Assessment',
         meta: 'Islamic Relief · Karachi · 2024',
         description: 'A structured review of implementation practices and strategic alignment across field programs.',
+        period: '2024',
+        location: 'Karachi'
       },
       {
         title: 'Policy Alignment and Strategy Support',
         meta: 'Government of Pakistan · Islamabad · 2025',
         description: 'Evidence-based strategy facilitation for aligning cross-sector interventions with policy priorities.',
+        period: '2025',
+        location: 'Islamabad'
       },
     ],
   },
@@ -199,21 +232,29 @@ const tabs: Tab[] = [
         title: 'Flood Response Monitoring',
         meta: 'Oxfam · Pakistan · 2024',
         description: 'Independent third-party monitoring to verify field delivery and accountability for emergency response.',
+        period: '2024',
+        location: 'Pakistan'
       },
       {
         title: 'Resilience Program Evaluation',
         meta: 'IRC · Punjab · 2025',
         description: 'Performance tracking and validation across multi-site resilience interventions.',
+        period: '2025',
+        location: 'Punjab'
       },
       {
         title: 'WASH Services Verification',
         meta: 'UNICEF · Sindh · 2024',
         description: 'Field verification of service delivery quality and beneficiary reach in priority districts.',
+        period: '2024',
+        location: 'Sindh'
       },
       {
         title: 'Community Accountability Review',
         meta: 'Action Against Hunger · Balochistan · 2025',
         description: 'An independent review of complaint mechanisms and community feedback processes.',
+        period: '2025',
+        location: 'Balochistan'
       },
     ],
   },
@@ -227,31 +268,43 @@ const tabs: Tab[] = [
         title: 'Baseline Study for Women Entrepreneurs',
         meta: 'IRC · KP · 2024',
         description: 'An evidence-based baseline informing entrepreneurship support and climate-resilient livelihoods.',
+        period: '2024',
+        location: 'Khyber Pakhtunkhwa'
       },
       {
         title: 'Market Systems Assessment',
         meta: 'UNFAO · Sindh · 2023',
         description: 'Sectoral analysis of market opportunities, constraints, and adaptation pathways.',
+        period: '2023',
+        location: 'Sindh'
       },
       {
         title: 'Institutional Capacity Assessment',
         meta: 'PPAF · Islamabad · 2022',
         description: 'A structured diagnostic of organizational capability and operational readiness.',
+        period: '2022',
+        location: 'Islamabad'
       },
       {
         title: 'Community Needs Assessment',
         meta: 'WHO · Gilgit · 2021',
         description: 'Multisector assessment to identify service gaps and priority needs in hard-to-reach areas.',
+        period: '2021',
+        location: 'Gilgit'
       },
       {
         title: 'Rural Livelihoods Study',
         meta: 'World Bank · Punjab · 2020',
         description: 'An applied assessment of livelihood challenges and transition opportunities for rural households.',
+        period: '2020',
+        location: 'Punjab'
       },
       {
         title: 'Social Accountability Scan',
         meta: 'Government of Pakistan · Federal · 2017',
         description: 'An institutional review of accountability mechanisms and service delivery feedback loops.',
+        period: '2017',
+        location: 'Federal'
       },
     ],
   },
@@ -450,11 +503,11 @@ export default function ImpactPage() {
       <section className="relative isolate overflow-hidden bg-charcoal text-white">
         <div className="absolute inset-0">
           <Image
-            src="/images/hero/feature-2.svg"
+            src="/images/impact-banner.jpg"
             alt="Impact background"
             fill
             priority
-            className="object-cover opacity-20"
+            className="object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-charcoal/90 via-charcoal/65 to-charcoal/20" />
           <div className="absolute inset-0 bg-charcoal/40" />
@@ -609,15 +662,30 @@ export default function ImpactPage() {
                             className={`inline-flex rounded-full px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.25em] border ${getBadgeClasses(activeTabContent.color)}`}
                           >
                             <IconComponent className="h-3 w-3 mr-1.5" />
-                            {activeTabContent.label}
+                            {activeTabContent.id === 'current' ? 'Current 2026' : activeTabContent.label}
                           </span>
                         </div>
                         <h3 className="mt-4 font-serif text-[20px] leading-tight text-charcoal group-hover:text-red transition-colors duration-300">
                           {project.title}
                         </h3>
-                        <p className="mt-2 font-mono text-[12px] uppercase tracking-[0.2em] text-muted">
-                          {project.meta}
-                        </p>
+                        <div className="mt-2 flex flex-wrap gap-3">
+                          <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-muted flex items-center gap-1">
+                            <Building2 className="h-3 w-3" />
+                            {project.meta.split('·')[0]?.trim()}
+                          </p>
+                          {project.location && (
+                            <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-muted flex items-center gap-1">
+                              <MapPin className="h-3 w-3" />
+                              {project.location}
+                            </p>
+                          )}
+                          {project.period && (
+                            <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-muted flex items-center gap-1">
+                              <Calendar className="h-3 w-3" />
+                              {project.period}
+                            </p>
+                          )}
+                        </div>
                         <p className="mt-4 font-sans text-[14px] leading-6 text-muted line-clamp-3">
                           {project.description}
                         </p>

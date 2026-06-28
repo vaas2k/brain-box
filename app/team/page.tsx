@@ -65,6 +65,7 @@ interface LinkedInIconProps {
   className?: string;
 }
 
+// SECTION 1: Leadership (CEO + Co-Founder - stacked vertically)
 const leadership: LeadershipPerson[] = [
   {
     name: 'Rookh Niaz Khan',
@@ -74,37 +75,49 @@ const leadership: LeadershipPerson[] = [
     image: '/images/team/01-Rookh Niaz Khan.jpg',
     initials: 'RN',
     reverse: false,
-    linkedin: 'https://www.linkedin.com/in/rookh-niaz-khan/',
+    linkedin: 'https://www.linkedin.com/in/rookh-niaz-khan-b18a9449/',
   },
   {
-    name: 'Tasleem Ayaz',
-    title: 'PRINCIPAL CONSULTANT',
-    email: 'tasleem.ayaz@brainbox.com.pk',
-    bio: 'Tasleem brings decades of experience shaping inclusive development programs, supporting complex evaluations, and translating technical insights into practical field action. He is known for combining rigorous analysis with a collaborative, people-centered approach.',
-    image: '/images/team/03-Miss Tasleem Ayyaz.jpg',
-    initials: 'TA',
-    reverse: true,
-    linkedin: 'https://www.linkedin.com/in/tasleem-ayaz/',
+    name: 'Gulfam Mustafa',
+    title: 'CO-FOUNDER & PROGRAM DESIGN',
+    email: 'gulfam@brainbox.com.pk',
+    bio: 'Gulfam is the Co-Founder of Brainbox Syndicate, bringing extensive expertise in program design, strategic planning, and organizational development. He has been instrumental in shaping the firm\'s approach to sustainable development and capacity building across Pakistan.',
+    image: '/images/team/02-Gulfam Mustafa.jpg',
+    initials: 'GM',
+    reverse: false,
+    linkedin: 'https://www.linkedin.com/in/gulfamnet/',
   },
 ];
 
-const experts: Expert[] = [
-  { name: 'Gulfam Mustafa', role: 'Senior Consultant, Program Design', area: 'Senior Consultants', image: '/images/team/02-Gulfam Mustafa.jpg', linkedin: 'https://www.linkedin.com/in/gulfam-mustafa/' },
-  { name: 'Firuza Sultan-Zada', role: 'Senior Consultant, Regional Affairs', area: 'Senior Consultants', image: null, linkedin: 'https://www.linkedin.com/in/firuza-sultan-zada/' },
-  { name: 'Dr. Odimbe David Bwire', role: 'International Advisor, East Africa', area: 'Regional Leads', image: null, linkedin: 'https://www.linkedin.com/in/dr-odimbe-david-bwire/' },
+// SECTION 2: Senior Team (2 rows × 3 columns)
+const seniorTeam: Expert[] = [
+  { name: 'Tasleem Ayaz', role: 'Principal Consultant', area: 'Senior Consultants', image: '/images/team/03-Miss Tasleem Ayyaz.jpg', linkedin: 'https://www.linkedin.com/in/tasleem-ayaz/' },
+  { name: 'Sarir Ahmed Farooqi', role: 'Marker Assessment & Value Chain Lead', area: 'Regional Leads', image: '/images/team/09-Sharir Ahmad Farooqi.jpg', linkedin: 'https://www.linkedin.com/in/sarir-ahmad-farooqi-77b97822/' },
+  { name: 'Kashif Younus', role: 'Project Cycle Management', area: 'Senior Consultants', image: '/images/team/11-Kashif Younis.jpg', linkedin: 'https://www.linkedin.com/in/kashif-younus/' },
   { name: 'Sajida Hameed', role: 'Regional Lead, Southern Punjab', area: 'Regional Leads', image: '/images/team/04-Sajida Hameed.jpg', linkedin: 'https://www.linkedin.com/in/sajida-hameed/' },
-  { name: 'Shabnam Ayub', role: 'Technical Specialist, Gender & GBV', area: 'Technical Specialists', image: '/images/team/05-Shabnam Ayub.jpg', linkedin: 'https://www.linkedin.com/in/shabnam-ayub/' },
+  { name: 'Muhammad Anis Danish', role: 'Research & Evaluation Specialist', area: 'Technical Specialists', image: '/images/team/12-Anis Danish.jpg', linkedin: 'https://www.linkedin.com/in/muhammadanisdanish/' },
+  { name: 'Shabnam Ayub', role: 'Trainer Enterprise & Skill Development', area: 'Technical Specialists', image: '/images/team/05-Shabnam Ayub.jpg', linkedin: 'https://www.linkedin.com/in/shabnam-ayub/' },
+];
+
+// SECTION 3: All remaining experts (mixed)
+const otherExperts: Expert[] = [
+  { name: 'Firuza Sultan-Zada', role: 'Senior Consultant, Regional Affairs', area: 'Senior Consultants', image: '/images/team/14-FIRUZA SULTAN-ZADA.jpg', linkedin: 'https://www.linkedin.com/in/firuza-sultan-zada/' },
+  { name: 'Dr. Odimbe David Bwire', role: 'International Advisor, East Africa', area: 'Regional Leads', image: '/images/team/13-ODIMBE DAVID BWIRE.jpg', linkedin: 'https://www.linkedin.com/in/dr-odimbe-david-bwire/' },
   { name: 'Yasrab Nazir', role: 'Regional Lead, Peshawar KP', area: 'Regional Leads', image: '/images/team/06-Yasrab Nazir.png', linkedin: 'https://www.linkedin.com/in/yasrab-nazir/' },
   { name: 'Irshad Begum', role: 'Technical Specialist, Community Engagement', area: 'Technical Specialists', image: '/images/team/07-Irshad Begum.jpg', linkedin: 'https://www.linkedin.com/in/irshad-begum/' },
-  { name: 'Fayaz Muhammad', role: 'Senior Researcher', area: 'Senior Consultants', image: '/images/team/08-Fayyaz Muhammad.jpg', linkedin: 'https://www.linkedin.com/in/fayaz-muhammad/' },
-  { name: 'Shafi Ullah', role: 'MEL Specialist', area: 'Technical Specialists', image: null, linkedin: 'https://www.linkedin.com/in/shafi-ullah/' },
-  { name: 'Sarir Ahmed Farooqi', role: 'Capacity Building Lead', area: 'Regional Leads', image: '/images/team/09-Sharir Ahmad Farooqi.jpg', linkedin: 'https://www.linkedin.com/in/sarir-ahmed-farooqi/' },
-  { name: 'AB Shahid', role: 'Technical Consultant', area: 'Technical Specialists', image: '/images/team/10-AB Shahid.jpg', linkedin: 'https://www.linkedin.com/in/ab-shahid/' },
-  { name: 'Kashif Younus', role: 'Project Cycle Management', area: 'Senior Consultants', image: '/images/team/11-Kashif Younis.jpg', linkedin: 'https://www.linkedin.com/in/kashif-younus/' },
-  { name: 'Rafat Malik', role: 'Senior Consultant, WASH & DRR', area: 'Senior Consultants', image: null, linkedin: 'https://www.linkedin.com/in/rafat-malik/' },
-  { name: 'Feeroz Rafiq', role: 'Research & Evaluation Specialist', area: 'Technical Specialists', image: null, linkedin: 'https://www.linkedin.com/in/feeroz-rafiq/' },
-  { name: 'Muhammad Anis Danish', role: 'Research & Evaluation Specialist', area: 'Technical Specialists', image: '/images/team/12-Anis Danish.jpg', linkedin: 'https://www.linkedin.com/in/muhammadanisdanish/' },
+  { name: 'Fayaz Muhammad', role: 'Climate change and Livelihoods Specialist', area: 'Senior Consultants', image: '/images/team/08-Fayyaz Muhammad.jpg', linkedin: 'https://www.linkedin.com/in/fayaz-muhammad/' },
+  { name: 'Engr Shafi Ullah', role: 'disaster risk reduction, climate change, public health', area: 'Technical Specialists', image: '/images/team/15-SHAFI ULLAH.jpg', linkedin: 'https://www.linkedin.com/in/shafi-ullah/' },
+  { name: 'AB Shahid', role: 'Manual Development and Trainer', area: 'Technical Specialists', image: '/images/team/10-AB Shahid.jpg', linkedin: 'https://www.linkedin.com/in/ab-shahid/' },
+  { name: 'Rafat Malik', role: ' M & E Specialist ', area: 'Senior Consultants', image: '/images/team/16-RAFAT MALIK.jpg', linkedin: 'https://www.linkedin.com/in/rafat-malik/' },
+  { name: 'Feeroz Rafiq', role: 'Research & Evaluation Specialist', area: 'Technical Specialists', image: '/images/team/17-FEEROZ RAFIQ.jpg', linkedin: 'https://www.linkedin.com/in/feeroz-rafiq/' },
+  { name: 'Engr Ihsan Ullah', role: 'Sustainability & Climate Change Specialist', area: 'Technical Specialists', image: '/images/team/18-IHSAN ULLAH.jpg', linkedin: ' https://www.linkedin.com/in/ihsan-ullah-86748811/' },
+  { name: 'Jay Musyoka', role: 'Monitoring, Evaluation, Research, and Learning (MERL)', area: 'Research Specialists', image: '/images/team/19-Jay Musyoka.jpg', linkedin: null },
+  { name: 'Engr Salman Ahmed Khan', role: 'Software Developer and IT Specialist', area: 'Technical Specialists', image: '/images/team/20-Salman Ahmed Khan.jpg', linkedin: 'https://www.linkedin.com/in/salman-ahmed-khan-salsuqe/' },
+  { name: 'Naseem Akhtar Shaikh', role: 'Focal Person', area: 'Research Specialists', image: '/images/team/21-Naseem akhtar.jpg', linkedin: '' },
 ];
+
+// Combined experts for filtering (senior + other)
+const allExperts = [...seniorTeam, ...otherExperts];
 
 const filters: FilterKey[] = ['All', 'Senior Consultants', 'Regional Leads', 'Technical Specialists'];
 
@@ -210,12 +223,127 @@ function SocialLinks({ linkedin, email, className = "" }: SocialLinksProps) {
   );
 }
 
+// Expert Card component
+function ExpertCard({ person, size = "md" }: { person: Expert; size?: 'sm' | 'md' | 'lg' }) {
+  const initials = person.name.split(' ').map((n) => n[0]).join('').slice(0, 2);
+  
+  const sizeClasses = {
+    sm: "p-4",
+    md: "p-6",
+    lg: "p-8",
+  };
+  
+  const avatarSize = {
+    sm: "w-16",
+    md: "w-24",
+    lg: "w-32",
+  };
+  
+  return (
+    <motion.div 
+      variants={fadeInScale}
+      className={`group overflow-hidden rounded-[20px] border border-charcoal/10 bg-white text-center shadow-[0_1px_3px_rgba(0,0,0,0.08),0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${sizeClasses[size]}`}
+    >
+      <div className={`mx-auto mb-4 ${avatarSize[size]}`}>
+        <TeamAvatar 
+          initials={initials} 
+          image={person.image} 
+          name={person.name}
+          size={size}
+        />
+      </div>
+      <h3 className="font-sans text-[16px] font-bold text-charcoal group-hover:text-red transition-colors duration-300">
+        {person.name}
+      </h3>
+      <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
+        {person.role}
+      </p>
+      
+      {person.linkedin && (
+        <motion.a 
+          href={person.linkedin} 
+          target="_blank" 
+          rel="noreferrer" 
+          className="mt-4 inline-flex items-center gap-2 rounded-full border border-charcoal/10 px-4 py-2 text-charcoal/60 transition-all duration-300 hover:border-red/40 hover:bg-red/5 hover:text-red"
+          aria-label="LinkedIn"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <LinkedInIcon className="h-3.5 w-3.5" />
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em]">Connect</span>
+        </motion.a>
+      )}
+    </motion.div>
+  );
+}
+
+// Leadership Card component
+function LeadershipCard({ person, index }: { person: LeadershipPerson; index: number }) {
+  return (
+    <motion.div
+      variants={fadeInUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.15 }}
+      className="relative rounded-[24px] border border-charcoal/10 bg-white p-8 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 hover:shadow-xl max-w-3xl mx-auto"
+    >
+      <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+        <div className="relative w-full max-w-[200px] flex-shrink-0">
+          <div className="relative aspect-[3/4] overflow-hidden rounded-[20px] border border-charcoal/10 bg-cream shadow-lg transition-all duration-300 hover:shadow-xl">
+            {person.image ? (
+              <>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img 
+                  src={person.image} 
+                  alt={person.name} 
+                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 transition-opacity duration-300 hover:opacity-100" />
+              </>
+            ) : (
+              <div className="flex h-full items-center justify-center bg-gradient-to-br from-sage/20 to-sage/5 text-[54px] font-serif font-bold text-forest">
+                {person.initials}
+              </div>
+            )}
+          </div>
+          {index === 0 && (
+            <div className="absolute -top-2 -right-2 rounded-full bg-red px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-white shadow-lg shadow-red/20">
+              Founder & CEO
+            </div>
+          )}
+          {index === 1 && (
+            <div className="absolute -top-2 -right-2 rounded-full bg-gold px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-white shadow-lg shadow-gold/20">
+              Co-Founder
+            </div>
+          )}
+        </div>
+
+        <div className="flex-1 text-center md:text-left">
+          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.3em] text-red">
+            {person.title}
+          </p>
+          <h3 className="mt-2 font-serif text-[28px] font-bold leading-tight text-charcoal transition-colors duration-300 hover:text-red">
+            {person.name}
+          </h3>
+          
+          <SocialLinks linkedin={person.linkedin} email={person.email} className="justify-center md:justify-start mt-3" />
+          
+          <p className="mt-4 font-sans text-[14px] leading-7 text-muted">
+            {person.bio}
+          </p>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function TeamPage() {
   const [activeFilter, setActiveFilter] = useState<FilterKey>('All');
 
   const filteredExperts = useMemo(() => {
-    if (activeFilter === 'All') return experts;
-    return experts.filter((person) => person.area === activeFilter);
+    if (activeFilter === 'All') return allExperts;
+    return allExperts.filter((person) => person.area === activeFilter);
   }, [activeFilter]);
 
   return (
@@ -259,7 +387,7 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* SECTION 2 — LEADERSHIP */}
+      {/* SECTION 2 — LEADERSHIP (CEO Line 1, Co-Founder Line 2) */}
       <section className="bg-gradient-to-b from-white to-cream px-6 py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <motion.div
@@ -267,81 +395,64 @@ export default function TeamPage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="mb-12"
+            className="mb-12 text-center"
           >
-            <motion.div variants={fadeInUp} className="flex items-center gap-3">
+            <motion.div variants={fadeInUp} className="flex items-center justify-center gap-3">
               <div className="h-8 w-1 rounded-full bg-red" />
               <h2 className="font-serif text-[32px] font-bold text-charcoal sm:text-[36px]">
                 Our <span className="text-red">Leadership</span>
               </h2>
+              <div className="h-8 w-1 rounded-full bg-red" />
             </motion.div>
           </motion.div>
 
-          <div className="space-y-12">
-            {leadership.map((person, index) => (
-              <motion.div
-                key={person.name}
-                variants={fadeInUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.15 }}
-                className={`grid gap-8 rounded-[24px] border border-charcoal/10 bg-white p-8 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 hover:shadow-xl lg:grid-cols-[1fr_1.2fr] lg:items-center lg:p-12 ${person.reverse ? 'lg:[&>*:first-child]:order-2' : ''}`}
-              >
-                <div className="relative mx-auto w-full max-w-[280px]">
-                  <div className="relative aspect-[3/4] overflow-hidden rounded-[20px] border border-charcoal/10 bg-cream shadow-lg transition-all duration-300 hover:shadow-xl">
-                    {person.image ? (
-                      <>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img 
-                          src={person.image} 
-                          alt={person.name} 
-                          className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" 
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 transition-opacity duration-300 hover:opacity-100" />
-                      </>
-                    ) : (
-                      <div className="flex h-full items-center justify-center bg-gradient-to-br from-sage/20 to-sage/5 text-[54px] font-serif font-bold text-forest">
-                        {person.initials}
-                      </div>
-                    )}
-                  </div>
-                  {index === 0 && (
-                    <div className="absolute -top-2 -right-2 rounded-full bg-red px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-white shadow-lg shadow-red/20">
-                      Founder & CEO
-                    </div>
-                  )}
-                </div>
-
-                <div className="max-w-2xl">
-                  <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.3em] text-red">
-                    {person.title}
-                  </p>
-                  <h3 className="mt-2 font-serif text-[32px] font-bold leading-tight text-charcoal transition-colors duration-300 hover:text-red sm:text-[40px]">
-                    {person.name}
-                  </h3>
-                  
-                  <SocialLinks linkedin={person.linkedin} email={person.email} className="mt-4" />
-                  
-                  <p className="mt-5 font-sans text-[15px] leading-8 text-muted">
-                    {person.bio}
-                  </p>
-                  <a 
-                    href={`mailto:${person.email}`} 
-                    className="mt-5 inline-flex items-center gap-2 font-mono text-[13px] uppercase tracking-[0.25em] text-muted transition-colors duration-300 hover:text-red"
-                  >
-                    <Mail className="h-4 w-4" />
-                    {person.email}
-                  </a>
-                </div>
-              </motion.div>
-            ))}
+          <div className="space-y-8 max-w-4xl mx-auto">
+            {/* CEO - Line 1 */}
+            <LeadershipCard person={leadership[0]} index={0} />
+            {/* Co-Founder - Line 2 */}
+            <LeadershipCard person={leadership[1]} index={1} />
           </div>
         </div>
       </section>
 
-      {/* SECTION 3 — EXPERTS */}
+      {/* SECTION 3 — SENIOR TEAM (2 rows × 3 columns) */}
       <section className="bg-gradient-to-b from-cream to-white px-6 py-24 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="mb-12 text-center"
+          >
+            <motion.div variants={fadeInUp} className="flex items-center justify-center gap-3">
+              <div className="h-8 w-1 rounded-full bg-gold" />
+              <h2 className="font-serif text-[32px] font-bold text-charcoal sm:text-[36px]">
+                Senior <span className="text-gold">Team</span>
+              </h2>
+              <div className="h-8 w-1 rounded-full bg-gold" />
+            </motion.div>
+            <motion.p variants={fadeInUp} className="mt-2 text-muted">
+              Our most experienced consultants and specialists
+            </motion.p>
+          </motion.div>
+
+          <motion.div 
+            className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {seniorTeam.map((person) => (
+              <ExpertCard key={person.name} person={person} size="md" />
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* SECTION 4 — EXPERTS NETWORK (All remaining - mixed) */}
+      <section className="bg-gradient-to-b from-white to-cream px-6 py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <motion.div
             variants={staggerContainer}
@@ -368,7 +479,7 @@ export default function TeamPage() {
               variants={fadeInUp}
               className="flex flex-wrap gap-3"
             >
-              {filters.map((filter) => {
+              {/* {filters.map((filter) => {
                 const isActive = activeFilter === filter;
                 return (
                   <motion.button
@@ -386,62 +497,29 @@ export default function TeamPage() {
                     {filter}
                   </motion.button>
                 );
-              })}
+              })} */}
             </motion.div>
           </motion.div>
 
           <motion.div 
-            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+            className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
             {filteredExperts.map((person) => {
-              const initials = person.name.split(' ').map((n) => n[0]).join('').slice(0, 2);
-              return (
-                <motion.div 
-                  key={person.name} 
-                  variants={fadeInScale}
-                  className="group overflow-hidden rounded-[20px] border border-charcoal/10 bg-white p-6 text-center shadow-[0_1px_3px_rgba(0,0,0,0.08),0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
-                >
-                  <div className="mx-auto mb-4 w-24">
-                    <TeamAvatar 
-                      initials={initials} 
-                      image={person.image} 
-                      name={person.name}
-                      size="md"
-                    />
-                  </div>
-                  <h3 className="font-sans text-[16px] font-bold text-charcoal group-hover:text-red transition-colors duration-300">
-                    {person.name}
-                  </h3>
-                  <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
-                    {person.role}
-                  </p>
-                  
-                  {person.linkedin && (
-                    <motion.a 
-                      href={person.linkedin} 
-                      target="_blank" 
-                      rel="noreferrer" 
-                      className="mt-4 inline-flex items-center gap-2 rounded-full border border-charcoal/10 px-4 py-2 text-charcoal/60 transition-all duration-300 hover:border-red/40 hover:bg-red/5 hover:text-red"
-                      aria-label="LinkedIn"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <LinkedInIcon className="h-3.5 w-3.5" />
-                      <span className="font-mono text-[10px] uppercase tracking-[0.2em]">Connect</span>
-                    </motion.a>
-                  )}
-                </motion.div>
-              );
+              // Skip senior team members (they're shown above)
+              const isSenior = seniorTeam.some(senior => senior.name === person.name);
+              if (isSenior) return null;
+              
+              return <ExpertCard key={person.name} person={person} size="md" />;
             })}
           </motion.div>
         </div>
       </section>
 
-      {/* SECTION 4 — CTA */}
+      {/* SECTION 5 — CTA */}
       <section className="bg-gradient-to-b from-charcoal to-charcoal/95 px-6 py-24 text-white lg:px-8">
         <div className="mx-auto max-w-7xl">
           <motion.div 

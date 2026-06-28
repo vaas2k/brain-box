@@ -357,11 +357,11 @@ export default function ServicesPage() {
       <section className="relative isolate overflow-hidden bg-charcoal text-white">
         <div className="absolute inset-0">
           <Image
-            src="/images/hero/feature-1.svg"
+            src="/images/service.jpg"
             alt="Services background"
             fill
             priority
-            className="object-cover opacity-20"
+            className="object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-charcoal/90 via-charcoal/65 to-charcoal/20" />
           <div className="absolute inset-0 bg-charcoal/40" />

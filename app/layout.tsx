@@ -25,6 +25,8 @@ const dmMono = DM_Mono({
   display: "swap",
 });
 
+const baseUrl = new URL("https://www.brainbox.com.pk");
+
 export const metadata: Metadata = {
   title: {
     default: "Brainbox Syndicate | Pakistan's Premier Development Consulting Firm",
@@ -32,7 +34,36 @@ export const metadata: Metadata = {
   },
   description:
     "Expert sustainable development consulting — gender equality, green innovation, climate resilience, MEL, and capacity building since 2008.",
-  metadataBase: new URL("https://www.brainbox.com.pk"),
+  metadataBase: baseUrl,
+  viewport: { width: "device-width", initialScale: 1 },
+  keywords: [
+    "development consulting",
+    "gender equality",
+    "climate resilience",
+    "green innovation",
+    "MEL",
+    "capacity building",
+    "Pakistan consulting",
+    "strategic advisory",
+  ],
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#111827" },
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Brainbox Syndicate",
     description:
@@ -40,13 +71,26 @@ export const metadata: Metadata = {
     siteName: "Brainbox Syndicate",
     locale: "en_PK",
     type: "website",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
+    url: new URL("/", baseUrl),
+    images: [
+      {
+        url: "/images/impact-bg.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Brainbox Syndicate sustainable development consulting",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Brainbox Syndicate",
     description:
       "Expert sustainable development consulting — gender equality, green innovation, climate resilience, MEL, and capacity building since 2008.",
+    images: ["/images/impact-bg.jpg"],
+  },
+  icons: {
+    icon: "/images/icon_logo.ico",
+    apple: "/images/icon_logo.ico",
   },
 };
 
@@ -60,6 +104,27 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Brainbox Syndicate",
+              url: baseUrl.toString(),
+              logo: `${baseUrl.origin}/images/brainbox_Logo.png`,
+              contactPoint: [
+                {
+                  "@type": "ContactPoint",
+                  telephone: "+92 333 9855932",
+                  contactType: "customer service",
+                  areaServed: "PK",
+                  availableLanguage: ["English"],
+                },
+              ],
+            }),
+          }}
+        />
       </head>
       <body
         className={`${fraunces.variable} ${dmSans.variable} ${dmMono.variable} antialiased min-h-screen flex flex-col bg-cream text-charcoal`}

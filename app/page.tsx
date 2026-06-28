@@ -383,7 +383,7 @@ export default function Home() {
 
   const stats: Stat[] = [
     { value: "120+", label: "Baseline Assessments", icon: Award },
-    { value: "150+", label: "CSOs Empowered", icon: Users },
+    { value: "300+", label: "CSOs Empowered", icon: Users },
     { value: "30+", label: "Impact Evaluations", icon: TrendingUp },
     { value: "17+", label: "Years of Impact", icon: Shield },
   ];
@@ -774,10 +774,10 @@ export default function Home() {
       >
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/impact-bg.jpg"
+            src="/images/hero/banner-1.jpg"
             alt="Impact background"
             fill
-            className="object-cover opacity-20"
+            className="object-cover opacity-90"
           />
           <div className="absolute inset-0 z-10 bg-forest/85" />
         </div>

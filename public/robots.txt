@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.brainbox.com.pk/sitemap.xml
+Host: www.brainbox.com.pk
