@@ -432,104 +432,7 @@ export default function PortfolioPage() {
       <section className="sticky top-16 z-40 border-b border-charcoal/10 bg-white/95 shadow-sm backdrop-blur-lg">
         <div className="mx-auto max-w-7xl px-6 py-4 lg:px-8">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            {/* <motion.div 
-              className="flex flex-wrap gap-2"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              {categoryOptions.map((option) => {
-                const isActive = activeCategory === option.value;
-                const IconComponent = option.icon;
-                return (
-                  <motion.button
-                    key={option.value}
-                    variants={fadeInUp}
-                    type="button"
-                    onClick={() => {
-                      setActiveCategory(option.value);
-                      // Clear search when changing category, but keep tag if it exists
-                      // We'll keep the search query to maintain tag filtering
-                      if (option.value === 'all') {
-                        // If switching to 'all', keep the search if there is one
-                        // This allows seeing all projects with a specific tag
-                      } else {
-                        // If switching to a specific category, keep the search
-                        // to filter within that category
-                      }
-                      // Don't clear searchQuery - this allows tag filtering across categories
-                    }}
-                    className={`group relative flex items-center gap-2 rounded-full border px-5 py-2.5 font-mono text-[11px] font-semibold uppercase tracking-[0.25em] transition-all duration-300 ${
-                      isActive
-                        ? 'border-red bg-red text-white shadow-lg shadow-red/20'
-                        : 'border-charcoal/10 bg-cream text-charcoal hover:border-red hover:text-red hover:shadow-md'
-                    }`}
-                  >
-                    <IconComponent className={`h-4 w-4 transition-colors duration-300 ${isActive ? 'text-white' : 'text-muted group-hover:text-red'}`} />
-                    {option.label}
-                    {isActive && (
-                      <motion.span
-                        layoutId="active-indicator"
-                        className="absolute -bottom-1 left-1/2 h-0.5 w-8 -translate-x-1/2 rounded-full bg-red"
-                        transition={{ type: 'spring', duration: 0.5 }}
-                      />
-                    )}
-                  </motion.button>
-                );
-              })}
-            </motion.div> */}
-
-            {/* <motion.div 
-              className="flex-1 lg:max-w-xs"
-              variants={fadeInUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
-                <input
-                  value={searchQuery}
-                  onChange={(event) => {
-                    const value = event.target.value;
-                    setSearchQuery(value);
-                    // If search is cleared, also clear the active tag
-                    if (value === '') {
-                      setActiveTag('');
-                    } else {
-                      // If there's a tag that matches the search, set it as active
-                      // This keeps the UI in sync
-                      const matchingTag = allPortfolioItems
-                        .flatMap(item => {
-                          if (item.category === 'current') return item.project.tags;
-                          if (item.category === 'baseline') return item.project.tags;
-                          if (item.category === 'training') return item.project.tags;
-                          if (item.category === 'evaluation') return item.project.tags;
-                          return [];
-                        })
-                        .find(tag => tag.toLowerCase() === value.toLowerCase());
-                      
-                      if (matchingTag) {
-                        setActiveTag(matchingTag);
-                      } else {
-                        setActiveTag('');
-                      }
-                    }
-                  }}
-                  placeholder="Search projects..."
-                  className="w-full rounded-lg border border-charcoal/15 bg-white pl-10 pr-4 py-2.5 font-sans text-sm text-charcoal outline-none transition-all focus:border-red focus:ring-2 focus:ring-red/20"
-                />
-                {searchQuery && (
-                  <button
-                    onClick={clearFilters}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted transition-colors hover:text-red"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-                )}
-              </div>
-            </motion.div> */}
+            {/* Category filters - uncomment if needed */}
           </div>
 
           {/* Results counter */}
@@ -876,7 +779,7 @@ export default function PortfolioPage() {
                 </div>
               </motion.section>
 
-              {/* Evaluation Projects */}
+              {/* Evaluation Projects - TABULAR FORMAT */}
               <motion.section 
                 id="evaluation-projects" 
                 className="scroll-mt-[120px]"
@@ -897,50 +800,57 @@ export default function PortfolioPage() {
                   </span>
                 </div>
 
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <div className="overflow-hidden rounded-2xl border border-charcoal/10 bg-white shadow-sm">
+                  <div className="grid grid-cols-[60px_1.2fr_1.8fr_1fr_1.2fr] border-b border-charcoal/10 bg-gradient-to-r from-charcoal/5 to-transparent px-6 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.25em] text-charcoal/60">
+                    <span>#</span>
+                    <span>Client</span>
+                    <span>Study Title</span>
+                    <span>Duration</span>
+                    <span>Location</span>
+                  </div>
                   {evaluationProjects.map((item, index) => (
-                    <motion.article 
-                      key={item.project.id} 
-                      variants={fadeInUp}
-                      custom={index}
-                      className="group rounded-2xl bg-white p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08),0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(128,90,213,0.16)]"
+                    <motion.div
+                      key={item.project.id}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                      className={`grid grid-cols-[60px_1.2fr_1.8fr_1fr_1.2fr] gap-4 border-b border-charcoal/10 px-6 py-4 transition-all hover:bg-purple-50/30 ${
+                        index % 2 === 0 ? 'bg-white' : 'bg-charcoal/[0.02]'
+                      }`}
                     >
-                      <div className="flex items-start justify-between gap-3">
-                        <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-charcoal/40">{item.project.id}</span>
-                        <span className="rounded-full bg-purple-500 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.25em] text-white">
-                          {item.project.client}
-                        </span>
+                      <span className="font-mono text-[13px] font-semibold text-charcoal">{index + 1}</span>
+                      <div>
+                        <span className="font-sans text-[14px] font-semibold text-charcoal">{item.project.client}</span>
+                        <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-charcoal/40">{item.project.id}</p>
                       </div>
-                      <h3 className="mt-4 font-serif text-[20px] leading-tight text-charcoal transition-colors duration-300 group-hover:text-purple-600">
-                        {item.project.title}
-                      </h3>
-                      <div className="mt-3 flex flex-col gap-1">
-                        <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-charcoal/50">
-                          <Calendar className="h-3.5 w-3.5" />
-                          {item.project.duration}
-                        </p>
-                        <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-charcoal/50">
-                          <MapPin className="h-3.5 w-3.5" />
-                          {item.project.location}
-                        </p>
+                      <div>
+                        <p className="font-sans text-[13px] leading-tight text-charcoal/80">{item.project.title}</p>
+                        <div className="mt-1.5 flex flex-wrap gap-1.5">
+                          {item.project.tags.map((tag) => (
+                            <button
+                              key={tag}
+                              type="button"
+                              onClick={() => handleTagClick(tag)}
+                              className={`rounded-full px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] transition-colors duration-200 ${
+                                activeTag === tag
+                                  ? 'bg-red text-white'
+                                  : 'bg-purple-500/10 text-purple-600 hover:bg-purple-500/20'
+                              }`}
+                            >
+                              {tag}
+                            </button>
+                          ))}
+                        </div>
                       </div>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {item.project.tags.map((tag) => (
-                          <button
-                            key={tag}
-                            type="button"
-                            onClick={() => handleTagClick(tag)}
-                            className={`rounded-full px-3 py-1 font-mono text-[10px] uppercase tracking-[0.24em] transition-colors duration-200 ${
-                              activeTag === tag
-                                ? 'bg-red text-white border border-red'
-                                : 'bg-purple-500/10 text-purple-600 hover:bg-purple-500/20'
-                            }`}
-                          >
-                            {tag}
-                          </button>
-                        ))}
+                      <div className="flex items-center gap-1 font-sans text-[13px] text-charcoal/60">
+                        <Calendar className="h-3 w-3" />
+                        {item.project.duration}
                       </div>
-                    </motion.article>
+                      <div className="flex items-center gap-1 font-sans text-[13px] text-charcoal/60">
+                        <MapPin className="h-3 w-3" />
+                        {item.project.location}
+                      </div>
+                    </motion.div>
                   ))}
                 </div>
               </motion.section>
@@ -1084,7 +994,7 @@ export default function PortfolioPage() {
                   );
                 }
 
-                // Evaluation
+                // Evaluation - card view for filtered results
                 return (
                   <motion.article 
                     key={item.project.id} 

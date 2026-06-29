@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { 
   X, Award, MapPin, Clock, Users, Target, Sparkles, 
   Eye, Rocket, Gem, Trophy, Leaf, BarChart, Handshake, 
@@ -9,6 +9,35 @@ import {
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import Image from "next/image";
+import dynamic from 'next/dynamic';
+import 'leaflet/dist/leaflet.css';
+
+// Dynamically import Leaflet components - client only
+const MapContainer = dynamic(
+  () => import('react-leaflet').then(mod => mod.MapContainer),
+  { ssr: false }
+);
+const TileLayer = dynamic(
+  () => import('react-leaflet').then(mod => mod.TileLayer),
+  { ssr: false }
+);
+const Marker = dynamic(
+  () => import('react-leaflet').then(mod => mod.Marker),
+  { ssr: false }
+);
+const Popup = dynamic(
+  () => import('react-leaflet').then(mod => mod.Popup),
+  { ssr: false }
+);
+const Polyline = dynamic(
+  () => import('react-leaflet').then(mod => mod.Polyline),
+  { ssr: false }
+);
+
+const useMap = dynamic( //@ts-expect-error - will fix later
+  () => import('react-leaflet').then(mod => mod.useMap),
+  { ssr: false }
+);
 
 // Properly typed animation variants
 const fadeInUp: Variants = {
@@ -83,8 +112,8 @@ interface Office {
   region: string;
   focal: string;
   contact: string;
-  cx: number;
-  cy: number;
+  lat: number;
+  lng: number;
 }
 
 interface Award {
@@ -92,13 +121,8 @@ interface Award {
   label: string;
   aspect: string;
   icon: LucideIcon;
-  image: string; // Added image path
-  description?: string; // Optional description
-}
-
-interface PakistanMapProps {
-  activeOffice: number | null;
-  onSelect: (index: number | null) => void;
+  image: string;
+  description?: string;
 }
 
 interface ProfileRowProps {
@@ -106,6 +130,166 @@ interface ProfileRowProps {
   value: string;
   index: number;
 }
+
+// Map Controller Component - defined before use
+interface MapControllerProps {
+  activeOffice: number | null;
+}
+
+// We'll define MapController as a dynamic component that uses the map
+const MapController = dynamic<MapControllerProps>(
+  () => import('react-leaflet').then(mod => {
+    const { useMap: useMapHook } = mod;
+    return function MapControllerComponent({ activeOffice }: MapControllerProps) {
+      const map = useMapHook();
+      
+      useEffect(() => {
+        if (activeOffice !== null && offices[activeOffice]) {
+          const office = offices[activeOffice];
+          map.flyTo([office.lat, office.lng], 8, {
+            duration: 1.5,
+            easeLinearity: 0.25,
+          });
+        } else {
+          map.flyTo([30.3753, 69.3451], 5.5, {
+            duration: 1.5,
+            easeLinearity: 0.25,
+          });
+        }
+      }, [activeOffice, map]);
+
+      return null;
+    };
+  }),
+  { ssr: false }
+);
+
+// Client-side only component for markers
+interface MarkerComponentProps {
+  offices: Office[];
+  activeMapOffice: number | null;
+  setActiveMapOffice: (index: number | null) => void;
+}
+
+const MarkerComponent = dynamic<MarkerComponentProps>(
+  () => import('react-leaflet').then(mod => {
+    const { Marker: MarkerHook, Popup: PopupHook } = mod;
+    
+    return function MarkerComponent({ offices, activeMapOffice, setActiveMapOffice }: MarkerComponentProps) {
+      // We need to get L from the window or import it
+       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const [L, setL] = useState<any>(null);
+      
+      useEffect(() => {
+        // Dynamically import leaflet
+        import('leaflet').then((leaflet) => {
+          const L = leaflet.default || leaflet;
+          
+          // Fix marker icons
+           // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          delete (L.Icon.Default.prototype as any)._getIconUrl;
+          L.Icon.Default.mergeOptions({
+            iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+            iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+          });
+          
+          setL(L);
+        });
+      }, []);
+      
+      if (!L) return null;
+      
+      const createBrainboxIcon = (isActive: boolean = false) => {
+        return L.divIcon({
+          className: 'custom-marker',
+          html: `
+            <div style="
+              width: ${isActive ? '36px' : '24px'};
+              height: ${isActive ? '36px' : '24px'};
+              background: ${isActive ? '#DC2626' : '#EF4444'};
+              border-radius: 50%;
+              border: 3px solid white;
+              box-shadow: 0 0 20px rgba(220, 38, 38, ${isActive ? '0.8' : '0.4'});
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              transition: all 0.3s ease;
+              transform: ${isActive ? 'scale(1.1)' : 'scale(1)'};
+            ">
+              <div style="
+                width: ${isActive ? '14px' : '8px'};
+                height: ${isActive ? '14px' : '8px'};
+                background: white;
+                border-radius: 50%;
+                opacity: ${isActive ? '1' : '0.8'};
+              "></div>
+            </div>
+            ${isActive ? `
+              <div style="
+                position: absolute;
+                top: -20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #1A202C;
+                color: white;
+                padding: 4px 12px;
+                border-radius: 6px;
+                font-size: 12px;
+                font-weight: bold;
+                white-space: nowrap;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+                pointer-events: none;
+              ">
+                📍 Active
+              </div>
+            ` : ''}
+          `,
+          iconSize: [isActive ? 36 : 24, isActive ? 36 : 24],
+          iconAnchor: [isActive ? 18 : 12, isActive ? 18 : 12],
+          popupAnchor: [0, -isActive ? 22 : 16],
+        });
+      };
+      
+      return (
+        <>
+          {offices.map((office, idx) => (
+            <MarkerHook
+              key={office.city}
+              position={[office.lat, office.lng]}
+              icon={createBrainboxIcon(activeMapOffice === idx)}
+              eventHandlers={{
+                mouseover: () => setActiveMapOffice(idx),
+                mouseout: () => setActiveMapOffice(null),
+                click: () => setActiveMapOffice(idx === activeMapOffice ? null : idx),
+              }}
+            >
+              <PopupHook className="custom-popup">
+                <div className="p-2 min-w-[200px]">
+                  <h3 className="font-serif text-lg font-bold text-charcoal">
+                    {office.city}
+                  </h3>
+                  <p className="text-sm text-muted">{office.region}</p>
+                  <div className="mt-2 pt-2 border-t border-gray-100">
+                    <p className="text-sm font-semibold text-red">
+                      {office.focal}
+                    </p>
+                    {office.contact && (
+                      <p className="text-xs text-muted mt-1">
+                        📞 {office.contact}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </PopupHook>
+            </MarkerHook>
+          ))}
+        </>
+      );
+    };
+  }),
+  { ssr: false }
+);
 
 const milestones: Milestone[] = [
   { year: "2008", title: "Founded as a boutique development advisory" },
@@ -178,74 +362,69 @@ const corporateProfile: CorporateProfile = {
       label: "Operating Address",
       value: "Suit No. 03, First Floor, Plaza No. 15, E-11/3 Markaz, Islamabad",
     },
-    {
-      label: "Bank",
-      value: "United Bank Limited (UBL), E-11/3 Markaz Islamabad",
-    },
-    { label: "IBAN", value: "PK93 UNIL 0109 0002 3230 6161" },
   ],
 };
 
+// Office coordinates with real latitude/longitude
 const offices: Office[] = [
   {
     city: "Islamabad",
     region: "Federal Capital",
     focal: "Rookh Niaz Khan",
     contact: "+92 333 98 55 932",
-    cx: 118,
-    cy: 72,
+    lat: 33.6844,
+    lng: 73.0479,
   },
   {
     city: "Peshawar",
     region: "Khyber Pakhtunkhwa",
     focal: "Ayesha Malik",
     contact: "",
-    cx: 98,
-    cy: 58,
+    lat: 34.0151,
+    lng: 71.5249,
   },
   {
     city: "Gilgit",
     region: "Gilgit-Baltistan",
     focal: "Hassan Raza",
     contact: "",
-    cx: 148,
-    cy: 38,
+    lat: 35.9206,
+    lng: 74.3144,
   },
   {
     city: "Multan",
     region: "Punjab",
     focal: "Sana Iqbal",
     contact: "",
-    cx: 108,
-    cy: 118,
+    lat: 30.1575,
+    lng: 71.5249,
   },
   {
     city: "Sukkur",
     region: "Sindh",
     focal: "Farhan Ali",
     contact: "",
-    cx: 92,
-    cy: 138,
+    lat: 27.7052,
+    lng: 68.8574,
   },
   {
     city: "Karachi",
     region: "Sindh",
     focal: "Zainab Hussain",
     contact: "",
-    cx: 78,
-    cy: 188,
+    lat: 24.8607,
+    lng: 67.0011,
   },
   {
     city: "Quetta",
     region: "Balochistan",
     focal: "Imran Baloch",
     contact: "",
-    cx: 52,
-    cy: 112,
+    lat: 30.1798,
+    lng: 66.9750,
   },
 ];
 
-// Updated awards with image paths
 const awards: Award[] = [
   { 
     id: 1, 
@@ -289,7 +468,7 @@ const awards: Award[] = [
   },
   { 
     id: 6, 
-    label: "", 
+    label: "Climate Action Certificate", 
     aspect: "aspect-[4/5]", 
     icon: Globe, 
     image: "/images/certificates/3.png",
@@ -333,120 +512,6 @@ function LeafPattern() {
   );
 }
 
-function PakistanMap({ activeOffice, onSelect }: PakistanMapProps) {
-  return (
-    <motion.div
-      className="relative mx-auto max-w-md"
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-    >
-      <svg
-        viewBox="0 0 200 230"
-        className="mx-auto h-auto w-full max-h-[320px]"
-        aria-label="Map of Pakistan showing office locations"
-      >
-        {/* Simplified Pakistan outline */}
-        <path
-          d="M155 18 L168 28 L175 45 L170 62 L158 75 L145 82 L138 95 L130 105 L125 118 L118 128 L112 142 L105 155 L98 168 L92 182 L85 195 L78 210 L72 218 L65 212 L58 198 L52 182 L48 165 L45 148 L42 130 L40 112 L42 95 L48 78 L55 62 L62 48 L72 35 L85 25 L100 18 L118 15 L135 14 Z"
-          fill="#1A202C"
-          stroke="#4A5568"
-          strokeWidth="1.5"
-          strokeOpacity="0.4"
-        />
-        {/* Province detail lines */}
-        <path
-          d="M118 128 L125 118 L130 105"
-          fill="none"
-          stroke="#4A5568"
-          strokeWidth="0.75"
-          strokeOpacity="0.25"
-        />
-        <path
-          d="M92 182 L98 168 L105 155"
-          fill="none"
-          stroke="#4A5568"
-          strokeWidth="0.75"
-          strokeOpacity="0.25"
-        />
-
-        {offices.map((office, idx) => (
-          <g key={office.city}>
-            <circle
-              cx={office.cx}
-              cy={office.cy}
-              r="14"
-              fill="transparent"
-              className="cursor-pointer"
-              onMouseEnter={() => onSelect(idx)}
-              onMouseLeave={() => onSelect(null)}
-              onFocus={() => onSelect(idx)}
-              onBlur={() => onSelect(null)}
-              tabIndex={0}
-              role="button"
-              aria-label={`${office.city} — ${office.focal}`}
-            />
-            <circle
-              cx={office.cx}
-              cy={office.cy}
-              r={activeOffice === idx ? 6 : 4}
-              fill="#DC2626"
-              className="pointer-events-none transition-all duration-200"
-            />
-            <circle
-              cx={office.cx}
-              cy={office.cy}
-              r="8"
-              fill="none"
-              stroke="#DC2626"
-              strokeWidth="1"
-              strokeOpacity={activeOffice === idx ? 0.6 : 0}
-              className="pointer-events-none transition-all duration-200"
-            />
-            <motion.circle
-              cx={office.cx}
-              cy={office.cy}
-              r="12"
-              fill="none"
-              stroke="#DC2626"
-              strokeWidth="0.5"
-              initial={{ scale: 0 }}
-              animate={{ scale: activeOffice === idx ? 1 : 0 }}
-              transition={{ duration: 0.3 }}
-              opacity={activeOffice === idx ? 0.3 : 0}
-            />
-          </g>
-        ))}
-      </svg>
-
-      <AnimatePresence>
-        {activeOffice !== null && (
-          <motion.div
-            initial={{ opacity: 0, y: -10, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -10, scale: 0.9 }}
-            className="pointer-events-none absolute z-10 rounded-lg bg-charcoal px-4 py-3 text-center shadow-xl"
-            style={{
-              left: `${(offices[activeOffice].cx / 200) * 100}%`,
-              top: `${(offices[activeOffice].cy / 230) * 100}%`,
-              transform: "translate(-50%, -130%)",
-            }}
-          >
-            <p className="font-sans text-sm font-bold text-white">
-              {offices[activeOffice].focal}
-            </p>
-            <p className="font-mono text-[10px] text-white/70">
-              {offices[activeOffice].contact}
-            </p>
-            <div className="absolute bottom-0 left-1/2 h-2 w-2 -translate-x-1/2 translate-y-full rotate-45 bg-charcoal" />
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-}
-
 function ProfileRow({ label, value, index }: ProfileRowProps) {
   return (
     <motion.div
@@ -465,6 +530,7 @@ function ProfileRow({ label, value, index }: ProfileRowProps) {
 export default function AboutPage() {
   const [activeMapOffice, setActiveMapOffice] = useState<number | null>(null);
   const [lightboxAward, setLightboxAward] = useState<Award | null>(null);
+  const [isMapReady, setIsMapReady] = useState(false);
 
   const storyRef = useScrollReveal();
   const vmvRef = useScrollReveal();
@@ -473,11 +539,13 @@ export default function AboutPage() {
   const mapRef = useScrollReveal();
   const awardsRef = useScrollReveal();
 
+  // Pakistan center coordinates
+  const center: [number, number] = [30.3753, 69.3451];
+
   return (
     <>
       {/* SECTION 1 — PAGE HERO */}
       <section className="relative flex h-[70vh] min-h-[480px] items-center justify-center overflow-hidden">
-        {/* Background image with overlay */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/hero/feature-1.jpg"
@@ -532,7 +600,6 @@ export default function AboutPage() {
       {/* SECTION 2 — STORY SPLIT */}
       <section ref={storyRef} className="bg-gradient-to-b from-cream to-white px-6 py-28 lg:px-8">
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-16 lg:grid-cols-12 lg:gap-20">
-          {/* Left — sticky editorial column */}
           <motion.div
             className="relative lg:col-span-6 lg:sticky lg:top-28 lg:self-start"
             variants={staggerContainer}
@@ -593,7 +660,6 @@ export default function AboutPage() {
             />
           </motion.div>
 
-          {/* Right — timeline */}
           <motion.div
             className="lg:col-span-6"
             variants={staggerContainer}
@@ -781,7 +847,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* SECTION 6 — GEOGRAPHIC PRESENCE */}
+      {/* SECTION 6 — GEOGRAPHIC PRESENCE with Leaflet Map */}
       <section ref={mapRef} className="bg-gradient-to-b from-charcoal to-charcoal/95 px-6 py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <motion.div
@@ -802,15 +868,68 @@ export default function AboutPage() {
             >
               Nationwide Reach, <span className="text-gold">Local Expertise</span>
             </motion.h2>
+            <motion.p
+              variants={fadeInUp}
+              className="mt-4 text-white/60 max-w-2xl"
+            >
+              Hover over or click on markers to view office details. The map shows our strategic presence across Pakistan.
+            </motion.p>
           </motion.div>
 
-          <PakistanMap
-            activeOffice={activeMapOffice}
-            onSelect={setActiveMapOffice}
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="mt-12 overflow-hidden rounded-2xl border border-white/10 shadow-2xl"
+          >
+            <MapContainer
+              center={center}
+              zoom={5.5}
+              style={{ height: '500px', width: '100%' }}
+              className="z-10"
+              zoomControl={false}
+              whenReady={() => setIsMapReady(true)}
+            >
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              
+              {/* Pakistan outline - simplified */}
+              <Polyline
+                positions={[
+                  [35.5, 74.0], [36.0, 73.5], [36.5, 73.0], [37.0, 72.5],
+                  [36.8, 71.5], [36.5, 70.5], [36.0, 69.5], [35.5, 68.5],
+                  [34.5, 67.5], [33.5, 67.0], [32.5, 66.5], [31.5, 66.0],
+                  [30.5, 65.5], [29.5, 65.0], [28.5, 64.5], [27.5, 64.0],
+                  [26.5, 63.5], [25.5, 63.0], [24.5, 62.5], [23.5, 62.0],
+                  [23.0, 63.0], [23.5, 64.0], [24.0, 65.0], [24.5, 66.0],
+                  [24.0, 67.0], [24.5, 68.0], [25.0, 68.5], [25.5, 69.0],
+                  [26.0, 69.5], [26.5, 70.0], [27.0, 70.5], [27.5, 71.0],
+                  [28.0, 71.5], [28.5, 72.0], [29.0, 72.5], [29.5, 73.0],
+                  [30.0, 73.5], [30.5, 74.0], [31.0, 74.5], [31.5, 75.0],
+                  [32.0, 75.5], [32.5, 76.0], [33.0, 76.5], [33.5, 77.0],
+                  [34.0, 77.5], [34.5, 78.0], [35.0, 78.5], [35.5, 78.0],
+                  [36.0, 77.5], [36.0, 77.0], [35.5, 76.5], [35.0, 76.0],
+                  [35.0, 75.5], [35.0, 75.0], [35.0, 74.5], [35.5, 74.0]
+                ]}
+                pathOptions={{ color: 'rgba(255, 255, 255, 0.2)', weight: 2 }}
+                smoothFactor={1}
+              />
+
+              <MapController activeOffice={activeMapOffice} />
+
+              <MarkerComponent 
+                offices={offices} 
+                activeMapOffice={activeMapOffice} 
+                setActiveMapOffice={setActiveMapOffice} 
+              />
+            </MapContainer>
+          </motion.div>
 
           <motion.div
-            className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
+            className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
@@ -820,28 +939,41 @@ export default function AboutPage() {
               <motion.div
                 key={office.city}
                 variants={fadeInUp}
-                className="group rounded-xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:border-red hover:bg-white/10 hover:-translate-y-1 hover:shadow-lg"
+                className={`group rounded-xl border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer ${
+                  activeMapOffice === idx 
+                    ? 'border-red bg-red/10' 
+                    : 'border-white/10 bg-white/5 hover:border-red hover:bg-white/10'
+                }`}
+                onMouseEnter={() => setActiveMapOffice(idx)}
+                onMouseLeave={() => setActiveMapOffice(null)}
+                onClick={() => setActiveMapOffice(idx === activeMapOffice ? null : idx)}
               >
                 <div className="flex items-start justify-between">
-                  <h3 className="font-serif text-lg font-bold text-white group-hover:text-gold transition-colors duration-300">
+                  <h3 className={`font-serif text-lg font-bold transition-colors duration-300 ${
+                    activeMapOffice === idx ? 'text-gold' : 'text-white group-hover:text-gold'
+                  }`}>
                     {office.city}
                   </h3>
-                  <MapPin className="h-4 w-4 text-gold/50 group-hover:text-gold transition-colors duration-300" />
+                  <MapPin className={`h-4 w-4 transition-colors duration-300 ${
+                    activeMapOffice === idx ? 'text-red' : 'text-gold/50 group-hover:text-gold'
+                  }`} />
                 </div>
                 <p className="mt-1 font-sans text-sm text-white/60">{office.region}</p>
                 <p className="mt-3 font-sans text-sm font-medium text-gold">
                   {office.focal}
                 </p>
-                <p className="mt-1 font-mono text-xs text-white/50">
-                  {office.contact}
-                </p>
+                {office.contact && (
+                  <p className="mt-1 font-mono text-xs text-white/50">
+                    {office.contact}
+                  </p>
+                )}
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* SECTION 7 — AWARDS & RECOGNITION with Images */}
+      {/* SECTION 7 — AWARDS & RECOGNITION */}
       <section ref={awardsRef} className="bg-gradient-to-b from-cream to-white px-6 py-20 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <motion.div
@@ -884,7 +1016,6 @@ export default function AboutPage() {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="relative h-full min-h-[220px] w-full bg-gradient-to-br from-charcoal/5 to-charcoal/10">
-                    {/* Certificate Image */}
                     <Image
                       src={award.image}
                       alt={award.label}
@@ -893,18 +1024,8 @@ export default function AboutPage() {
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                     
-                    {/* Overlay gradient for better text readability */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    
-                    {/* Default state - icon and label shown when image is loading or as fallback */}
-                    {/* <div clas sName="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-charcoal/5 to-charcoal/10 group-hover:opacity-0 transition-opacity duration-300"> */}
-                      {/* <Icon className="h-12 w-12 mb-3 text-charcoal/40 group-hover:text-red/30 transition-colors duration-300" /> */}
-                      {/* <span className="font-serif text-sm italic text-muted text-center px-4">
-                        {award.label}
-                      </span>
-                    </div> */}
 
-                    {/* Hover overlay with action prompt */}
                     <motion.div
                       className="absolute inset-0 flex flex-col items-center justify-center bg-charcoal/75 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                       initial={false}
@@ -927,7 +1048,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Lightbox modal with certificate image */}
+      {/* Lightbox modal */}
       <AnimatePresence>
         {lightboxAward && (
           <motion.div

@@ -93,7 +93,7 @@ const leadership: LeadershipPerson[] = [
 const seniorTeam: Expert[] = [
   { name: 'Tasleem Ayaz', role: 'Principal Consultant', area: 'Senior Consultants', image: '/images/team/03-Miss Tasleem Ayyaz.jpg', linkedin: 'https://www.linkedin.com/in/tasleem-ayaz/' },
   { name: 'Sarir Ahmed Farooqi', role: 'Marker Assessment & Value Chain Lead', area: 'Regional Leads', image: '/images/team/09-Sharir Ahmad Farooqi.jpg', linkedin: 'https://www.linkedin.com/in/sarir-ahmad-farooqi-77b97822/' },
-  { name: 'Kashif Younus', role: 'Project Cycle Management', area: 'Senior Consultants', image: '/images/team/11-Kashif Younis.jpg', linkedin: 'https://www.linkedin.com/in/kashif-younus/' },
+  { name: 'Muhammad Kashif Younis', role: 'MEL/Program Design/Implementations', area: 'Senior Consultants', image: '/images/team/11-Kashif Younis.jpg', linkedin: 'https://www.linkedin.com/in/kashif-younus/' },
   { name: 'Sajida Hameed', role: 'Regional Lead, Southern Punjab', area: 'Regional Leads', image: '/images/team/04-Sajida Hameed.jpg', linkedin: 'https://www.linkedin.com/in/sajida-hameed/' },
   { name: 'Muhammad Anis Danish', role: 'Research & Evaluation Specialist', area: 'Technical Specialists', image: '/images/team/12-Anis Danish.jpg', linkedin: 'https://www.linkedin.com/in/muhammadanisdanish/' },
   { name: 'Shabnam Ayub', role: 'Trainer Enterprise & Skill Development', area: 'Technical Specialists', image: '/images/team/05-Shabnam Ayub.jpg', linkedin: 'https://www.linkedin.com/in/shabnam-ayub/' },

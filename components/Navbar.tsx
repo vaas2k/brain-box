@@ -24,6 +24,7 @@ export default function Navbar() {
     { name: "Services", href: "/services" },
     { name: "Impact", href: "/impact" },
     { name: "Portfolio", href: "/portfolio" },
+    { name: "Gallery", href: "/gallery" },
     { name: "Strategy 2030", href: "/strategy" },
     { name: "Team", href: "/team" },
     { name: "Clients", href: "/clients" },

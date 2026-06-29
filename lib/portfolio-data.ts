@@ -366,7 +366,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "tr-02",
-      client: "IRC",
+      client: "Civil Society Support Program",
       duration: "Jul-Sep 2025",
       location: "Mirpurkhas, Sindh",
       description: "PFA and MHPSS training for counselors. 4 online sessions + in-person refresher.",
@@ -374,7 +374,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "tr-03",
-      client: "WHH",
+      client: "Participatory Village Development Program",
       duration: "Aug-Sep 2025",
       location: "District Mirpurkhas, Sindh",
       description: "3-day First Aid ToT with demonstrations and simulations. Training manual developed.",
@@ -390,7 +390,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "tr-05",
-      client: "WHH",
+      client: "Islamic Relief Pakistan",
       duration: "May-Dec 2024",
       location: "KP, Sindh, Punjab, Balochistan",
       description: "GALS Trainer's Manual developed. 4 ToTs for project teams across all provinces.",
@@ -414,7 +414,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "tr-08",
-      client: "WHH",
+      client: "Muslim Aid Pakistan",
       duration: "Jun-Jul 2023",
       location: "Qilla Saifullah, Balochistan",
       description: "4 training events on Dry Fodder, Livestock, Poultry, and Kitchen Gardening.",
@@ -430,7 +430,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "tr-10",
-      client: "WHH",
+      client: "Islamic Relief Pakistan",
       duration: "May 2023",
       location: "Peshawar, KP",
       description: "4 Staff Capacity Building Workshops on DRR, Climate, Protection, and Inclusion.",
@@ -438,7 +438,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "tr-11",
-      client: "GIZ",
+      client: "Islamic Relief Pakistan",
       duration: "Oct-Dec 2022",
       location: "Peshawar and Swat, KP",
       description: "Backyard Poultry Production training for L&DD Staff and IRP staff.",
@@ -454,7 +454,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "tr-13",
-      client: "GIZ",
+      client: "Islamic Relief Pakistan",
       duration: "Oct-Dec 2022",
       location: "Peshawar and Swat, KP",
       description: "Training Service Providers on Walnut Production Technology and Management.",
@@ -462,7 +462,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "tr-14",
-      client: "USAID",
+      client: "WWF-Pakistan",
       duration: "Sep-Nov 2022",
       location: "Punjab and Sindh",
       description: "ToTs on poultry and egg incubation for 150 rural women entrepreneurs.",
@@ -470,7 +470,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "tr-15",
-      client: "NCA",
+      client: "Muslim Aid",
       duration: "March 2022",
       location: "District Jhang, Punjab",
       description: "Capacity building of 50 Government School Teachers on Alternate Disciplines.",
@@ -486,7 +486,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "tr-17",
-      client: "UNICEF",
+      client: "Farmers Development Program",
       duration: "Jan-Dec 2022",
       location: "Multan, Punjab",
       description: "4 major trainings on COVID-19 SOPs, RCCE, SBCC, Mental Health, and GRM.",
@@ -502,7 +502,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "tr-19",
-      client: "Aga Khan",
+      client: "Community Uplift Program (CUP)",
       duration: "Nov 2021-Jan 2022",
       location: "District Battagram, KP",
       description: "10 Capacity Building Programs on Education, Governance, Gender, and DRR.",
@@ -528,7 +528,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "ev-02",
-      client: "NCA",
+      client: "Islamic Relief",
       duration: "Feb-Dec 2023",
       title: "Final Evaluation: Climate Sensitive Livelihood Modeling for Coastal Communities",
       location: "Coastal Belt of Thatta, Karachi",
@@ -536,7 +536,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "ev-03",
-      client: "WHH",
+      client: "Pak Mission Society,",
       duration: "Nov 2024-Mar 2025",
       title: "End-line Assessment: Disaster Resilience and Livelihood Restoration in Flood-Affected Areas",
       location: "District Rajanpur, Punjab",
@@ -560,7 +560,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "ev-06",
-      client: "UNFAO",
+      client: "WWF-Pakistan",
       duration: "Jan-Mar 2024",
       title: "Farmers' Perspective Study: Upscaling Green Pakistan Programme – Agroforestry Component",
       location: "National Coverage (all provinces)",
@@ -568,7 +568,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "ev-07",
-      client: "USAID/SUCCESS",
+      client: "European Union (EU)",
       duration: "May-Aug 2022",
       title: "Impact Assessment: Income Generation Grants under SUCCESS Programme",
       location: "Hyderabad, Dadu, Umerkot, Jamshoro, Sindh",
@@ -592,7 +592,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "ev-10",
-      client: "Oxfam",
+      client: "International Rescue Committee (IRC)",
       duration: "Sep 2021-Mar 2022",
       title: "Final Evaluation: Addressing Women's Health and Safety Needs During COVID-19",
       location: "Peshawar and Swat, KP",
@@ -600,7 +600,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "ev-11",
-      client: "Islamic Relief",
+      client: "Penny Appeal",
       duration: "Dec 2016-Mar 2017",
       title: "Annual Program Evaluation: Multi-Sector Humanitarian Response",
       location: "Punjab, Balochistan, Sindh, KP",
@@ -615,4 +615,4 @@ export const portfolioData: PortfolioData = {
       tags: ["Research", "Agriculture", "Livelihoods"],
     },
   ],
-};
+};  
