@@ -163,27 +163,27 @@ const tabs: Tab[] = [
         period: 'May – December 2026',
         location: 'All Districts of AJK'
       },
-      {
-        title: 'Women-led Climate Enterprise Baseline',
-        meta: 'IRC · Khyber Pakhtunkhwa · 2025',
-        description: 'A mixed-method assessment shaping women-led resilient livelihood pathways in climate-vulnerable districts.',
-        period: '2025',
-        location: 'Khyber Pakhtunkhwa'
-      },
-      {
-        title: 'Gender and Social Inclusion Review',
-        meta: 'UN Women · Punjab · 2024',
-        description: 'Rapid review supporting inclusive programming design for women and youth-led initiatives.',
-        period: '2024',
-        location: 'Punjab'
-      },
-      {
-        title: 'MEL System Strengthening for Local Partners',
-        meta: 'Oxfam · Sindh · 2025',
-        description: 'A practical systems upgrade for evidence-based learning and accountability in partner organizations.',
-        period: '2025',
-        location: 'Sindh'
-      },
+      // {
+      //   title: 'Women-led Climate Enterprise Baseline',
+      //   meta: 'IRC · Khyber Pakhtunkhwa · 2025',
+      //   description: 'A mixed-method assessment shaping women-led resilient livelihood pathways in climate-vulnerable districts.',
+      //   period: '2025',
+      //   location: 'Khyber Pakhtunkhwa'
+      // },
+      // {
+      //   title: 'Gender and Social Inclusion Review',
+      //   meta: 'UN Women · Punjab · 2024',
+      //   description: 'Rapid review supporting inclusive programming design for women and youth-led initiatives.',
+      //   period: '2024',
+      //   location: 'Punjab'
+      // },
+      // {
+      //   title: 'MEL System Strengthening for Local Partners',
+      //   meta: 'Oxfam · Sindh · 2025',
+      //   description: 'A practical systems upgrade for evidence-based learning and accountability in partner organizations.',
+      //   period: '2025',
+      //   location: 'Sindh'
+      // },
     ],
   },
   {

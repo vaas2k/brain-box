@@ -544,7 +544,7 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "ev-04",
-      client: "PPAF",
+      client: "Islamic Relief Pakistan",
       duration: "Dec 2024-Jun 2025",
       title: "Livelihood Options Analysis: Extreme Poverty Graduation Program in Mountain Regions",
       location: "District Muzaffarabad, AJK",

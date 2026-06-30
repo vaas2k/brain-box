@@ -157,10 +157,10 @@ export default function GalleryPage() {
         id: i + 1,
         src: `/gallery/${i + 1}.jpg`,
         alt: `Gallery image ${i + 1}`,
-        category: categories[i % categories.length],
+        // category: categories[i % categories.length],
         date: `202${i % 3 + 2}`,
-        location: locations[i % locations.length],
-        description: descriptions[i % descriptions.length],
+        // location: locations[i % locations.length],
+        // description: descriptions[i % descriptions.length],
       };
     });
     setGalleryImages(images);

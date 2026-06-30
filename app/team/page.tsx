@@ -111,9 +111,9 @@ const otherExperts: Expert[] = [
   { name: 'Rafat Malik', role: ' M & E Specialist ', area: 'Senior Consultants', image: '/images/team/16-RAFAT MALIK.jpg', linkedin: 'https://www.linkedin.com/in/rafat-malik/' },
   { name: 'Feeroz Rafiq', role: 'Research & Evaluation Specialist', area: 'Technical Specialists', image: '/images/team/17-FEEROZ RAFIQ.jpg', linkedin: 'https://www.linkedin.com/in/feeroz-rafiq/' },
   { name: 'Engr Ihsan Ullah', role: 'Sustainability & Climate Change Specialist', area: 'Technical Specialists', image: '/images/team/18-IHSAN ULLAH.jpg', linkedin: ' https://www.linkedin.com/in/ihsan-ullah-86748811/' },
-  { name: 'Jay Musyoka', role: 'Monitoring, Evaluation, Research, and Learning (MERL)', area: 'Research Specialists', image: '/images/team/19-Jay Musyoka.jpg', linkedin: null },
+  { name: 'Jay Musyoka', role: 'Monitoring, Evaluation, Research, and Learning (MERL)', area: 'Research Specialists', image: '/images/team/19-Jay Musyoka.jpg', linkedin: 'https://www.linkedin.com/in/jay-musyoka-01a721121/' },
   { name: 'Engr Salman Ahmed Khan', role: 'Software Developer and IT Specialist', area: 'Technical Specialists', image: '/images/team/20-Salman Ahmed Khan.jpg', linkedin: 'https://www.linkedin.com/in/salman-ahmed-khan-salsuqe/' },
-  { name: 'Naseem Akhtar Shaikh', role: 'Focal Person', area: 'Research Specialists', image: '/images/team/21-Naseem akhtar.jpg', linkedin: '' },
+  { name: 'Naseem Akhtar Shaikh', role: 'Focal Person Sindh', area: 'Research Specialists', image: '/images/team/21-Naseem akhtar.jpg', linkedin: '' },
 ];
 
 // Combined experts for filtering (senior + other)

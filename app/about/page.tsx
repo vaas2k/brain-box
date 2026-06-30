@@ -378,7 +378,7 @@ const offices: Office[] = [
   {
     city: "Peshawar",
     region: "Khyber Pakhtunkhwa",
-    focal: "Ayesha Malik",
+    focal: "Yasrab Nazir",
     contact: "",
     lat: 34.0151,
     lng: 71.5249,
@@ -386,7 +386,7 @@ const offices: Office[] = [
   {
     city: "Gilgit",
     region: "Gilgit-Baltistan",
-    focal: "Hassan Raza",
+    focal: "Sadia Kanval",
     contact: "",
     lat: 35.9206,
     lng: 74.3144,
@@ -394,7 +394,7 @@ const offices: Office[] = [
   {
     city: "Multan",
     region: "Punjab",
-    focal: "Sana Iqbal",
+    focal: "Sajida Hameed",
     contact: "",
     lat: 30.1575,
     lng: 71.5249,
@@ -402,7 +402,7 @@ const offices: Office[] = [
   {
     city: "Sukkur",
     region: "Sindh",
-    focal: "Farhan Ali",
+    focal: "Nazeer Ahmed Ujjan",
     contact: "",
     lat: 27.7052,
     lng: 68.8574,
@@ -410,7 +410,7 @@ const offices: Office[] = [
   {
     city: "Karachi",
     region: "Sindh",
-    focal: "Zainab Hussain",
+    focal: "Muhammad Anis Danish",
     contact: "",
     lat: 24.8607,
     lng: 67.0011,
@@ -418,7 +418,7 @@ const offices: Office[] = [
   {
     city: "Quetta",
     region: "Balochistan",
-    focal: "Imran Baloch",
+    focal: "Rabia Zakir",
     contact: "",
     lat: 30.1798,
     lng: 66.9750,
